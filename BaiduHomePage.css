@@ -1,0 +1,709 @@
+				html,body {
+					padding:0;
+					margin:0;
+				}
+				
+				/* top的盒子
+				 * 提供下滑动条 
+				 */
+				#box {
+					position:absolute;
+					z-index:-1;
+					top:0;
+					bottom:0;
+					left:0;
+					right:0;
+					overflow:auto;
+				}
+				
+				/* top bar 
+				 * padding-right:95px是为了不让最后的元素距离右栏的更多产品过进
+				 */
+				#top {
+					padding-right:95px;
+					min-width:1000px;
+					height:30px;
+					font-family: sans-serif;
+					font-size: 12px;
+					line-height:0px;
+					border-bottom:solid 1px #e7e7e7;
+				}
+				
+				/* top bar
+				 * 所有链接
+				 */
+				#top a {
+					padding: 0 0.5em;
+					line-height: 30px;
+					vertical-align: middle;	
+					color: black;	
+				}
+				
+
+				/* top bar
+				 * weather bar
+				 */				
+				#weatherclick {
+					display:inline-block;
+					margin-left:15px;
+					padding-right:7px;
+					line-height:20px !important;
+					text-decoration:none;
+				}
+				
+				#weatherclick:hover {
+					background:pink;
+				}
+				
+				/* top bar
+				 * weather bar
+				 * weather icon 
+				 */	
+				.icon {
+					display:inline-block;
+					width:20px;
+					height:20px;
+					vertical-align:bottom;
+					background:url("https://ss0.bdstatic.com/k4oZeXSm1A5BphGlnYG/icon/weather/aladdin/png_18/a0.png");
+					background-repeat:no-repeat;
+				}
+				
+				/* top bar
+				 * weather bar
+				 * weather quality 
+				 */	
+				.weatherquality	{
+					color: #badc00;
+					margin-left:7px;
+					margin-right:7px;
+				}
+				
+				/* top bar
+				 * weather bar
+				 * weather qualitynumber
+				 * 后面的竖线，通过font-size控制高度；
+				 */	
+				.weatherqualitynumber:after {
+					content:"";
+					font-size:10px;
+					border-right:solid 1px black;
+					padding-left:1em;
+				}
+				
+				
+				/* toprightlist下拉列表 
+				 * 右浮动，
+				 * 设置高度，超过高度的隐藏
+				 * 点击出现隐藏的内容
+				 */
+				#toprightlist {
+					float: right;
+					height: 30px;
+					line-height: 30px;
+					text-align: center;
+					overflow: hidden;
+				}
+				
+				#toprightlist:hover {
+					overflow:visible;
+					
+				}
+				
+				/* toprightlist下拉列表 
+				 * 等边三角形
+				 * 通过边框的配合
+				 */
+				.triangle {
+					width:0;
+					border-bottom: solid 8px #999;
+					border-left: solid 4px transparent;
+					border-right: solid 4px transparent;
+					margin-left: auto;
+					margin-right: auto;
+				} 
+				
+				/* toprightlist下拉列表 
+				 * 双层三角形(外) 
+				 * 与双层三角形(内)配合
+				 */
+				.outertriangle {
+					width:0;
+					border-bottom: solid 8px #999;
+					border-left: solid 8px transparent;
+					border-right: solid 8px transparent;
+					margin-left: auto;
+					margin-right: auto;
+				}
+				
+				/* toprightlist下拉列表 
+				 * 双层三角形(内) 
+				 * 设置相对位置，置于上层，
+				 * 用于覆盖双层三角形(内)和下面的下拉列表
+				 */
+				.innertriangle {
+					position:relative;
+					margin-top: -7px;
+					margin-left: auto;
+					margin-right: auto;
+					width:0;
+					border-bottom: solid 7px white;
+					border-left: solid 7px transparent;
+					border-right: solid 7px transparent;
+				}
+							
+				/* toprightlist下拉列表 
+				 * itembox 项目盒子
+				 * 上移1px
+				 * 便于被双层三角形(内)覆盖
+				 */
+				#toprightlist .itembox {
+					display:inline-block;
+					margin-top:-1px;
+					line-height: 30px;
+					text-decoration: none;
+					border: solid 1px #999;
+					box-shadow: 2px 2px 2px #999;
+				}
+				
+				/* toprightlist下拉列表 
+				 * itembox 项目盒子
+				 * li列表
+				 * 设置block，便于换行
+				 */
+				#toprightlist li {
+					display: block;
+					text-align: center;
+				}
+				
+				#toprightlist li a {
+					text-decoration: none;
+				}
+				
+				/* top bar
+				 * toprightlink
+				 * 右浮动
+				 */
+				#toprightlink {
+					float:right;
+					font-size:14px;
+					line-height:30px;
+				}
+				
+				/* productbox
+				 * 为了能获取窗口的高度，需要绝对定位
+				 * 再加top:0;bottom:0;height100%
+				 */
+				#productbox {
+					position:absolute;
+					top:0;
+					right:0;
+					height:30px;
+					width:85px;
+					color:white;
+					background:#398bfb;
+					overflow:hidden;
+				}
+				
+				#productbox:hover {
+					float:none;
+					bottom:0;
+					height:100%;
+					color:black;
+					background:#f0f0f0;
+				}
+				
+				/* productbox
+				 * productupbox
+				 * 为了能和top的下边界平齐
+				 * 需要在高度上再加1px
+				 */				
+				#productupbox {
+					width:100%;
+					height:31px;
+					line-height:30px;
+					text-align:center;
+				}
+				
+				/* productbox
+				 * productupbox
+				 * span
+				 * 文字垂直对齐
+				 */
+				#productupbox span {
+					font-size:13px;
+					vertical-align:middle;
+				}
+				
+				/* productbox
+				 * productdownbox
+				 * 高度是窗口跟随productbox的窗口高度
+				 * 文字垂直对齐
+				 */
+				#productdownbox {
+					height:100%;
+					background:#f0f0f0;
+					overflow:auto;
+				}
+				
+				/* productbox
+				 * productdownbox
+				 * productdownboxcontent
+				 * 外边距是为了避免productdownbox突然增加的滑动条扰动
+				 */
+				#productdownboxcontent {
+					height:700px;
+					width:65px;
+					margin-left:10px;
+					background:#f0f0f0;
+				}
+				
+				#productdownboxcontent a {
+					display: block;
+					padding: 10px 0;
+					font-size:12px;
+					color: black;
+					text-align: center;
+					text-decoration: none;
+					border-bottom: solid 1px #e7e7e7;
+				}
+				
+				#productdownboxcontent a:first-child {
+					margin-top: 10px;
+					border-top: solid 1px #e7e7e7;
+				}
+				
+				#logozone {
+					margin: auto;
+					margin-top:70px;
+					height: 151px;
+					line-height: 151px;
+					width: 641px;
+					text-align:center;
+				}
+				
+				#logozone img {
+					width:270px;
+					height:129px;
+					vertical-align: middle;
+				}
+				
+				/* searchform
+				 * 对于inline和inline-block，如果有空格或者换行，会反映在内容中就会有一个空格
+				 * 如果要消除这样的空格，有种显示上比较优雅的方式，就是用注释（这是从张鑫旭大神那看来的）
+				 * 或者在父元素设置font-size:0px;
+				 * 又或者去掉代码中两个input间的空格；
+				 * 对于input和button无法对齐的问题
+				 * 解决办法：1，float：left；2，在button中加文字或者空白符号 3，加上vertical-align:middle; 4，vertical-align:top;
+				 */
+				#searchform {
+					position:relative;
+					margin:0px auto;
+					width:641px;
+					height:40px;	
+					font-size:0px;
+					text-align:left;
+				}
+				
+				
+				#searchinput {
+					width: 523px;
+					height: 20px;
+					padding: 9px 7px;
+					font-size: 16px;
+					vertical-align:top;
+					border: 1px solid #b8b8b8;
+				}
+				
+				
+				.searchicon{
+					position: absolute;
+					top:0;
+					right:111px;
+					bottom:0;
+					margin:auto;
+					height: 16px;
+					width: 18px;
+					background: #fff url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_5606e8f.png) no-repeat;
+					background-image: -webkit-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_5606e8f.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_fb6c085.png) 2x);
+					background-image: -moz-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_5606e8f.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_fb6c085.png) 2x);
+					background-image: -o-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_5606e8f.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_fb6c085.png) 2x);
+					background-image: -ms-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_5606e8f.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_fb6c085.png) 2x);
+					cursor: pointer;
+				}
+				
+				/* HTML中input和button解决等高不对齐的原因
+				 * 原因：
+				 * 1、button在高度计算上始终使用了Quirks模式。
+				 * 2、在Quirks模式下，边框的计算是在元素的宽度内的，
+				 * 而不像标准模式一样计算在外部，所以在text和button上同时设置边框就会得到button的高度比text小的现象。
+				 * 3、button的高度包含边框的高度，而文本框text则不包含边框高度。
+				 */
+				#searchbutton {
+					display: inline-block;
+					cursor: pointer;
+					margin:0;
+					padding: 0;
+					width: 102px;
+					height: 40px;
+					font-size: 16px;
+					vertical-align:top;
+					color: white;
+					background-color: #38f;
+					border: 0;
+				}
+
+				#contentbox {
+					margin: auto;
+					margin-top: 100px; 
+					width: 896px;
+					height: 404px;
+    			   	overflow: hidden;
+					border: 1px solid #e7e7e7;
+				}
+				
+				#contentboxtopbar {
+					height:40px;
+					font-size: 0;
+					line-height:0;
+					border-bottom: 1px solid #e7e7e7;
+				}
+				
+				#myfocus, #myrecommand, #mynavigation{
+					display: inline-block;
+					zoom: 1;
+					width: 80px;
+					height: 40px;
+					font-size: 14px;
+					line-height:40px;
+					color: #333;
+					vertical-align:top;
+					text-align: center;
+					cursor: pointer;
+				} 
+				
+				#myfocus {
+					width: 124px;
+				}
+				
+				#myrecommand {
+					color:white;
+					background:#9D9D9D;
+				}
+				
+				.myfocuslogo {
+					width: 17px;
+					height: 17px;
+					background: transparent url(myfocus_a2.png) no-repeat 1px 0 ;
+					
+				}
+
+				.myfocuslogo:hover {
+					width: 17px;
+					height: 17px;
+					background: transparent url(myfocus_b2.png) no-repeat 1px 0 ;
+				}
+				
+				#myfocus > *, #myrecommand > *, #mynavigation > * {
+					vertical-align:middle;
+				}
+				
+				#myfocus:hover, #myrecommand:hover, #mynavigation:hover {
+					font-weight:bold;
+					color:white;
+					background:	#BEBEBE;
+				}
+				
+				#contentfocusbox {
+					display:inline-block;
+					margin-top: 20px;
+					margin-right: 5px;
+					width:100%;
+				}
+								
+				#contentfocusbox aside {
+					float:right;
+					display:inline-block;
+					width:300px;
+				}
+				
+				.title-text, .hot-refresh, .hot-refresh-text {
+					color:black;
+					text-decoration:none;
+				}
+				
+				.title-text {
+					font-size: 14px;
+					font-weight: bold;
+				}
+				
+				.hot-refresh {
+					display: block;
+					float: right;
+					height: 22px;
+					padding-top: 3px;
+					padding-right: 30px;
+					width: 60px;
+					cursor: pointer;
+				}
+				
+				.hot-refresh-icon {
+					width: 20px;
+					height: 16px;
+					background: url(https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/mantpl/img/news/news_88aeb6fe.png) -23px -25px no-repeat;
+					vertical-align: bottom;
+				}
+				
+				.hot-refresh-text {
+					font-size: 13px;
+					width: 40px;
+					text-align: center;
+					white-space: nowrap;
+				}
+				
+				.newslistul, .newslistli {
+					 padding:0;
+					 margin:0;
+					 list-style:none;
+				}
+				
+				.newslistul {
+					float:left;
+					padding-top:20px;
+					padding-right:5px;
+					width: 300px;
+				}
+				
+				.newslistli {
+					float:left;
+					display: inline-block;
+					width: 145px;
+					height: 34px;
+					margin-right: 3px;
+					zoom: 1;
+				}
+				
+				.newslistli > * {
+					vertical-align: middle;
+				}
+					
+				
+				.newslistli a {
+					max-width: 113px;
+					font-size: 14px;
+					color: rgb(51, 51, 51);
+					text-overflow:ellipsis;
+					text-decoration:none;
+				}
+				
+				.newslistli a:hover {
+					color:#3399CC; 
+					text-decoration:underline;
+					font-weight:bold;
+				}
+				
+				#contentfocusboxleftside {
+					padding: 0px 25px;
+					height:100px;
+					font-size:0;
+				}
+				
+				#contentfocusboxleftsidetop {
+					font-size: 13px;
+					color: rgba(0, 0, 0, 0.4);
+				}
+				
+				#contentfocusboxleftsidetop > * {
+					vertical-align:middle;
+				}
+				
+				.line {
+					display:inline-block;
+					height: 0px;
+					width: 172px;
+					font-size: 0px;
+					vertical-align:center;
+					border-bottom: 1px solid rgb(226, 226, 226);
+				}
+
+				.baiduicon {
+					margin: 0 6px 0 6px;
+					height: 14px;
+					width: 14px;
+					background: url(zhuazi2.png) no-repeat 1px 0;
+				}
+				
+				#newstable {
+					float: left;
+					display:line-height;
+					text-align: left;
+					width: 535px;
+				}
+				
+				.noliststyle {
+					display:inline-block;
+					margin: 0;
+					padding: 0;
+					list-style:none;
+				}
+
+				.hot-point {
+					padding: 0 2px;
+				    font-size: 12px;
+				    line-height: 12px;
+				    color: #f13f40;
+				    border: 1px solid #efb9b9;
+				    border-radius: 3px;
+				    -moz-border-radius: 3px;
+				    -webkit-border-radius: 3px;
+				}
+
+				.newsrows1title, .newsrows2title  {
+					width:100%;
+					font-family: arial, 'Microsoft Yahei', '微软雅黑';
+					font-size: 18px;
+					line-height: 1em;
+					color: #333;
+					font-weight: bold;
+					line-height: 53.6px;
+					vertical-align:middle;
+					text-decoration:none;
+					text-overflow:ellipsis;
+				}
+
+				.newsrows2title  {
+					line-height: 24px;
+				}
+
+				.newsrows1, .newsrows2{
+					padding-top: 8px;
+					border-bottom: 1px solid rgb(226, 226, 226);
+				}
+
+			
+				.newsrows1picture {
+					font-size:3px;
+				}
+				
+				
+				.newsrows1 footer, .newsrows2 footer{
+					padding-top: 10px;
+					padding-bottom: 19px;
+					color: rgba(0,0,0,0.4);
+					height: 15px;
+					line-height: 15px;
+					font-size: 13px;
+				}
+
+
+				.newsrows1 footer img, .newsrows2 footer img {
+					float:right;
+					width: 19px;
+					height: 15px;
+					background: url(https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/mantpl/img/news/dustbin_new_41cbcb37.png) no-repeat 0 -19px;
+					visibility: hidden;
+				}
+				
+				.src-net, .src-time{
+					margin-right: 10px;
+					line-height: 15px;
+					font-size: 13px;
+					text-decoration: none;
+					color: rgba(0,0,0,0.4);
+				}
+				
+				.newsrows2 {
+					display: table;
+    				zoom: 1;
+    				min-height: 140px;
+   					overflow: hidden;
+				}
+				
+				.newsrows2picture {
+					display: table-cell;
+					padding: 20px 0;
+				    vertical-align: middle;
+				    zoom: 1;
+				}
+
+				.newsrows2textzone {
+					display: table-cell;
+					padding-left: 21px;
+				    zoom: 1;
+				    width: 337px;
+					vertical-align: middle;
+				}
+				
+				.morebar {
+				    padding-top: 20px;
+				    margin:  auto;
+				    cursor: pointer;
+				    width: 90px;
+				    height: 45px;
+				    text-align: center;
+				}
+
+
+				.morebartext {
+					font-size: 12px;
+					color: #999;
+				}
+
+				.morebartexttriangele {
+				    height: 18px;
+				    width: 34px;
+				    font-size: 0;
+				    margin: 10px auto 0 auto;
+				    border: 0;
+				    font-size: 0;
+				}
+
+				.morebaroutertriangele {
+					position: relative;
+					margin: 0;
+					padding: 0;
+					width: 0;
+					border: solid 16px  transparent;
+					border-top: solid 16px black;
+				}
+
+				.morebarinnertriangele {
+					position: absolute;
+					top:-16px;
+					left:-15px;
+					margin: 0;
+					padding: 0;
+					width: 0;
+					border: solid 15px transparent;
+					border-top: solid 15px white;
+				}
+
+				.myfooter {			
+				    margin: 70px auto;
+				    color: #999;
+				    zoom: 1;
+				    font-size: 12px;
+				    text-align: center; 
+				}
+
+				.myfooter *{
+					vertical-align: middle;
+					color: #999;
+					line-height: 19px;
+				}
+
+
+				.ICPlogo {
+					display: inline-block;
+					width: 19px;
+					height: 19px;
+					background: #fff url(ICPlogo2.png) no-repeat 3px 0;
+				}
+
+				.sercuelogo {
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					background: #fff url(surcue2.png) no-repeat 3px 0;
+
+				}
+
