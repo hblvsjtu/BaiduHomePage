@@ -431,7 +431,7 @@
 		.myfocuslogo {
 			width: 17px;
 			height: 17px;
-			background: url(myfocus_a2.png) no-repeat 1px 0 ;
+			background: url(picture/myfocus_a2.png) no-repeat 1px 0 ;
 			
 		}
 
@@ -584,7 +584,7 @@
 			margin: 0 6px 0 6px;
 			height: 14px;
 			width: 14px;
-			background: url(zhuazi2.png) no-repeat 1px 0;
+			background: url(picture/zhuazi2.png) no-repeat 1px 0;
 		}
 
 		.newstable {
