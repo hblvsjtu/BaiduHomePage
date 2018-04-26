@@ -6,8 +6,7 @@
 			<title>BaiduHomePage</title>
 			<link rel="shortcut icon" href="myIcon.ico" type="image/x-icon"/>
 			<link rel="stylesheet" type="text/css" href="BaiduHomePage.css"/>
-			<script src="jquery-3.3.1.js" type="text/javascript"></script>
-			
+			<script src="jquery-3.3.1.js" type="text/javascript"></script>	
 		</head>
 		<body id="mybody">
 			<div id="box" class="box">
@@ -264,9 +263,13 @@
 				<a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001">
 					<div class="sercuelogo" ></div>
 					京公网安备 11000002000001号
-				</a>
+				</a><br>
+				获取滚动坐标
 				滚动坐标x:<span id='gundong_x'></span>px；
-				滚动坐标y:<span id='gundong_y'></span>px；
+				滚动坐标y:<span id='gundong_y'></span>px；<br>
+				获取视窗坐标
+				视窗坐标x:<span id='shichuang_x'></span>px；
+				视窗坐标y:<span id='shichuang_y'></span>px；
 			</footer>
 			<script>
 
@@ -288,6 +291,7 @@
 				var i=0;
 				var seemore_click=function() {
 					i=i+1;
+					console.log("i的值为: "+i);
 					var contentbox_height=363+i*300;
 					contentbox.style.height=contentbox_height+'px';
 				};
@@ -301,7 +305,7 @@
                 var newsinterest_mouseleave=function() {
                     this.style.visibility="hidden";
                 };
-                for(i=0; i<3; i++) {
+                for(let i=0; i<3; i++) {
                     newsrows[i].addEventListener('mouseenter', newsinterest_mouseenter.bind(newsinterest[i]), false);
                     newsrows[i].addEventListener('mouseleave', newsinterest_mouseleave.bind(newsinterest[i]), false);
                 }
@@ -312,6 +316,7 @@
 
                 	//使用指定的窗口，如果不带参数则使用当前窗口
                 	var w = this || window;
+                	var d = w.document;
 
                 	//除IE8及之前的版本，其他所有的浏览器都能用
                 	if(w.pageXOffset != null) {
@@ -320,18 +325,48 @@
                 	}
                 	
                 	//标准模式下的IE浏览器或其他所有的浏览器
+                	
                 	else if(document.compatMode == "CSS1Compat") {
-                		gundong_x.innerHTML = "标准模式_" + w.document.documentElement.scrollLeft;
-                		gundong_y.innerHTML = "标准模式_" + w.document.documentElement.scrollTop;
+                		gundong_x.innerHTML = "标准模式_" + d.documentElement.scrollLeft;
+                		gundong_y.innerHTML = "标准模式_" + d.documentElement.scrollTop;
                 	}
 
                 	//怪异模式下的IE浏览器或其他所有的浏览器
                 	else {
-                		gundong_x.innerHTML = "怪异模式_" + w.document.body.scrollLeft;
-                		gundong_y.innerHTML = "怪异模式_" + w.document.body.scrollTop;
+                		gundong_x.innerHTML = "怪异模式_" + d.body.scrollLeft;
+                		gundong_y.innerHTML = "怪异模式_" + d.body.scrollTop;
                 	}	
                 }
                 document.addEventListener("mousemove", checkScrollPosition.bind(), false);
+
+                var shichuang_x = document.getElementById("shichuang_x");
+                var shichuang_y = document.getElementById("shichuang_y");
+                var getViewportSize = function() {
+
+                	//使用指定的窗口，如果不带参数则使用当前窗口
+                	var w = this || window;
+                	var d = w.document;
+
+                	//除IE8及之前的版本，其他所有的浏览器都能用
+                	if(w.pageXOffset != null) {
+                		shichuang_x.innerHTML = "正常版本_" + w.innerWidth;
+                		shichuang_y.innerHTML = "正常版本_" + w.innerHeight;
+                	}
+                	
+                	//标准模式下的IE浏览器或其他所有的浏览器
+                	
+                	else if(document.compatMode == "CSS1Compat") {
+                		shichuang_x.innerHTML = "标准模式_" + d.documentElement.clientWidth;
+                		shichuang_y.innerHTML = "标准模式_" + d.documentElement.clientHeight;
+                	}
+
+                	//怪异模式下的IE浏览器或其他所有的浏览器
+                	else {
+                		shichuang_x.innerHTML = "怪异模式_" + d.body.clientWidth;
+                		shichuang_y.innerHTML = "怪异模式_" + d.body.clientHeight;
+                	}	
+                }
+                document.addEventListener("mousemove", getViewportSize.bind(), false);
                 
 			</script>
 		</body>
