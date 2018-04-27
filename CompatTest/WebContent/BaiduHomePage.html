@@ -264,39 +264,36 @@
 					<div class="sercuelogo" ></div>
 					京公网安备 11000002000001号
 				</a><br>
+				<span id="position">
 				获取滚动坐标
-				滚动坐标x:<span id='gundong_x'></span>px；
-				滚动坐标y:<span id='gundong_y'></span>px；<br>
+				滚动坐标x:<span id='gundong_X'></span>px；
+				滚动坐标y:<span id='gundong_Y'></span>px；<br>
 				获取视窗坐标
-				视窗坐标x:<span id='shichuang_x'></span>px；
-				视窗坐标y:<span id='shichuang_y'></span>px；
+				视窗坐标x:<span id='shichuang_X'></span>px；
+				视窗坐标y:<span id='shichuang_Y'></span>px；
+				</span>
 			</footer>
 			<script>
 
+				/* myfocus_mouseenter和myfocus_mouseleave
+				 * 鼠标的进出的同时更换myfocus里面图片
+                 */
 				var $myfocus = $("#myfocus");
 				var myfocus = $myfocus[0];
 				var $myfocusicon = $("#myfocusicon");
 				var myfocusicon = $myfocusicon[0];
 				var myfocus_mouseenter=function() {
-					myfocusicon.style.backgroundImage='url(myfocus_b2.png)';
+					myfocusicon.style.backgroundImage='url(picture/myfocus_b2.png)';
 				}
 				var myfocus_mouseleave=function() {
-					myfocusicon.style.backgroundImage='url(myfocus_a2.png)';
+					myfocusicon.style.backgroundImage='url(picture/myfocus_a2.png)';
 				}
 				myfocus.addEventListener('mouseenter', myfocus_mouseenter, false);
 				myfocus.addEventListener('mouseleave', myfocus_mouseleave, false);
 
-				var seemore=document.getElementById('seemore');
-				var contentbox=document.getElementById('contentbox');
-				var i=0;
-				var seemore_click=function() {
-					i=i+1;
-					console.log("i的值为: "+i);
-					var contentbox_height=363+i*300;
-					contentbox.style.height=contentbox_height+'px';
-				};
-				seemore.addEventListener('click', seemore_click, false);
-
+				/* newsinterest_mouseenter和newsinterest_mouseleave
+                 * 鼠标的进出的同时更改newsinterest的显藏
+                 */
 				var newsrows=document.getElementsByName("newsrows");
                 var newsinterest=document.getElementsByName("newsinterest");
                 var newsinterest_mouseenter=function() {
@@ -310,63 +307,149 @@
                     newsrows[i].addEventListener('mouseleave', newsinterest_mouseleave.bind(newsinterest[i]), false);
                 }
 
-                var gundong_x = document.getElementById("gundong_x");
-                var gundong_y = document.getElementById("gundong_y");
-                var checkScrollPosition = function() {
+                
+                /* checkScrollOffset
+                 * 获取窗口滚动条的偏移量
+                 */
+                var checkScrollOffset = function(gundong_X, gundong_Y, myWindow) {
+                	
+                	//使用指定接受参数的元素
+                	var gundong_X = document.getElementById(gundong_X);
+                	var gundong_Y = document.getElementById(gundong_Y);
 
                 	//使用指定的窗口，如果不带参数则使用当前窗口
-                	var w = this || window;
+                	var w = myWindow || window;
                 	var d = w.document;
 
                 	//除IE8及之前的版本，其他所有的浏览器都能用
                 	if(w.pageXOffset != null) {
-                		gundong_x.innerHTML = "正常版本_" + w.pageXOffset;
-                		gundong_y.innerHTML = "正常版本_" + w.pageYOffset;
+                		gundong_X.innerHTML = "正常版本_" + w.pageXOffset;
+                		gundong_Y.innerHTML = "正常版本_" + w.pageYOffset;
                 	}
                 	
                 	//标准模式下的IE浏览器或其他所有的浏览器
                 	
                 	else if(document.compatMode == "CSS1Compat") {
-                		gundong_x.innerHTML = "标准模式_" + d.documentElement.scrollLeft;
-                		gundong_y.innerHTML = "标准模式_" + d.documentElement.scrollTop;
+                		gundong_X.innerHTML = "标准模式_" + d.documentElement.scrollLeft;
+                		gundong_Y.innerHTML = "标准模式_" + d.documentElement.scrollTop;
                 	}
 
                 	//怪异模式下的IE浏览器或其他所有的浏览器
                 	else {
-                		gundong_x.innerHTML = "怪异模式_" + d.body.scrollLeft;
-                		gundong_y.innerHTML = "怪异模式_" + d.body.scrollTop;
+                		gundong_X.innerHTML = "怪异模式_" + d.body.scrollLeft;
+                		gundong_Y.innerHTML = "怪异模式_" + d.body.scrollTop;
                 	}	
                 }
-                document.addEventListener("mousemove", checkScrollPosition.bind(), false);
 
-                var shichuang_x = document.getElementById("shichuang_x");
-                var shichuang_y = document.getElementById("shichuang_y");
-                var getViewportSize = function() {
+                /* getViewportSize
+                 * 获取视窗的宽度和高度
+                 */
+                var getViewportSize = function(shichuang_X, shichuang_Y, myWindow) {
+
+                	var shichuang_X = document.getElementById(shichuang_X);
+                	var shichuang_Y = document.getElementById(shichuang_Y);
 
                 	//使用指定的窗口，如果不带参数则使用当前窗口
-                	var w = this || window;
+                	var w = myWindow || window;
                 	var d = w.document;
 
                 	//除IE8及之前的版本，其他所有的浏览器都能用
                 	if(w.pageXOffset != null) {
-                		shichuang_x.innerHTML = "正常版本_" + w.innerWidth;
-                		shichuang_y.innerHTML = "正常版本_" + w.innerHeight;
+                		shichuang_X.innerHTML = "正常版本_" + w.innerWidth;
+                		shichuang_Y.innerHTML = "正常版本_" + w.innerHeight;
                 	}
                 	
                 	//标准模式下的IE浏览器或其他所有的浏览器
                 	
                 	else if(document.compatMode == "CSS1Compat") {
-                		shichuang_x.innerHTML = "标准模式_" + d.documentElement.clientWidth;
-                		shichuang_y.innerHTML = "标准模式_" + d.documentElement.clientHeight;
+                		shichuang_X.innerHTML = "标准模式_" + d.documentElement.clientWidth;
+                		shichuang_Y.innerHTML = "标准模式_" + d.documentElement.clientHeight;
                 	}
 
                 	//怪异模式下的IE浏览器或其他所有的浏览器
                 	else {
-                		shichuang_x.innerHTML = "怪异模式_" + d.body.clientWidth;
-                		shichuang_y.innerHTML = "怪异模式_" + d.body.clientHeight;
+                		shichuang_X.innerHTML = "怪异模式_" + d.body.clientWidth;
+                		shichuang_Y.innerHTML = "怪异模式_" + d.body.clientHeight;
                 	}	
                 }
-                document.addEventListener("mousemove", getViewportSize.bind(), false);
+
+                /* getElementSize
+                 * 获取元素的宽度和长度
+                 */
+                var getElementSize = function(myElement) {
+                		var myElement = document.getElementById(myElement);
+                		var box = myElement.getBoundingClientRect();
+                		var width = box.width || (box.right-box.left);
+                		var height = box.height || (box.top-box.bottom);
+                		console.log("box的左上角X坐标："+ box.left +"px;");
+                		console.log("box的左上角Y坐标："+ box.top +"px;");
+                		console.log("box的右下角X坐标："+ box.right +"px;");
+                		console.log("box的右下角Y坐标："+ box.bottom +"px;");
+                		console.log("box的宽度："+ width +"px;");
+                		console.log("box的高度："+ height +"px;");
+
+                }
+
+                document.addEventListener("mousemove", function() {
+                		checkScrollOffset("gundong_X", "gundong_Y");
+                }, false);
+
+                document.addEventListener("mousemove", function() {
+                		getViewportSize("shichuang_X", "shichuang_Y");
+                }, false);
+
+                var myElement = document.getElementById("contentbox");
+               	myElement.addEventListener("mousemove", function() {
+                		getElementSize("contentbox");
+                }, false);
+
+
+				/* 调整contentbox的高度
+                 * 两种方法，一种是点击'seemore'元素
+                 * 另外一种是比较 预设阈值 > 文档高度 - 视窗高度 - 滚动偏移量Y；
+                 * 此时增加contentbox的高度
+                 */
+
+				var seemore=document.getElementById('seemore');
+				var contentbox=document.getElementById('contentbox');
+				var i=0;
+				var seemore_click=function() {
+					i=i+1;
+					console.log("i的值为: "+i);
+					var contentbox_height=363+i*300;
+					contentbox.style.height=contentbox_height+'px';
+				};
+				seemore.addEventListener('click', seemore_click, false);
+
+				var setcontentboxHeight = function() {
+					var html = document.getElementsByTagName("html")[0];
+					var docunmentHeight =html.getBoundingClientRect().height;
+					var scrollOffsetY = document.documentElement.scrollTop;
+					var visionHeight = document.documentElement.clientHeight;
+					if((docunmentHeight - visionHeight - scrollOffsetY) < 265) {
+						seemore_click();
+					} 
+				}
+				document.addEventListener("mousemove", setcontentboxHeight, false);
+
+				/* 判断元素是否溢出
+				 * 先利用clientHeight获取元素高度，在利用scrollHeight获取内容高度
+				 * 然后比较这两个高度，如果scrollHeight>clientHeight,则溢出
+				 */ 
+				 var isOverflow = function(ele) {
+					var element = document.getElementById(ele);
+					var scrollHeight = element.scrollHeight;
+					var clientHeight = element.clientHeight;
+					if(scrollHeight > clientHeight) {
+						console.log(ele + "溢出了");
+					}else {
+						console.log(ele + "没有溢出");
+					}
+				 }
+				 document.addEventListener("mousemove", function() {
+				 		isOverflow("contentbox");
+				 }, false);
+				 
                 
 			</script>
 		</body>
