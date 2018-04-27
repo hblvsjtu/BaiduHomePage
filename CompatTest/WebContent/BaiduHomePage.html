@@ -302,12 +302,43 @@
                 var newsinterest_mouseleave=function() {
                     this.style.visibility="hidden";
                 };
-                for(let i=0; i<3; i++) {
+                var length = document.getElementsByName("newsrows").length;
+                for(let i=0; i<length; i++) {
                     newsrows[i].addEventListener('mouseenter', newsinterest_mouseenter.bind(newsinterest[i]), false);
                     newsrows[i].addEventListener('mouseleave', newsinterest_mouseleave.bind(newsinterest[i]), false);
                 }
 
-                
+				/* 增加节点creatElement()
+				 * 当contentbox高度增加的时候添加节点
+				 
+				  var addnewsrows = function() {
+				  		var newstable = document.getElementById("newstable");
+				  		var newsrows = document.createElement("div");
+				  		var length = document.getElementsByName("newsrows").length;
+				  		newsrows.id = "newsrows_" + length;
+				  		newsrows.className = "newsrows1";
+				  		//newsrows.name = "newsrows";无法设置name
+				  		newsrows.setAttribute("name","newsrows");
+				  		newstable.appendChild(newsrows);
+				  }
+*/
+				  /* 通过复制的方式添加节点cloneNode()
+				 * 当contentbox高度增加的时候添加节点
+				 */
+				  var addnewsrows = function() {
+				  		var newstable = document.getElementById("newstable");
+				  		var oldnewsrows = document.getElementById("newsrows_1");
+				  		var newsrows = oldnewsrows.cloneNode(true);
+				  		length = document.getElementsByName("newsrows").length;
+				  		lengths=length+1;
+				  		newsrows.id = "newsrows_" + lengths;
+				  		newstable.appendChild(newsrows);
+				  		var newsinterest=document.getElementsByName("newsinterest")
+				  		newsinterest[length].id="newsinterest_"+ lengths;
+				  		newsrows.addEventListener('mouseenter', newsinterest_mouseenter.bind(newsinterest[length]), false);
+				  		newsrows.addEventListener('mouseleave', newsinterest_mouseleave.bind(newsinterest[length]), false);
+				  }
+				    
                 /* checkScrollOffset
                  * 获取窗口滚动条的偏移量
                  */
@@ -408,6 +439,7 @@
                  * 两种方法，一种是点击'seemore'元素
                  * 另外一种是比较 预设阈值 > 文档高度 - 视窗高度 - 滚动偏移量Y；
                  * 此时增加contentbox的高度
+                 * 并添加newsrows节点；
                  */
 
 				var seemore=document.getElementById('seemore');
@@ -416,7 +448,8 @@
 				var seemore_click=function() {
 					i=i+1;
 					console.log("i的值为: "+i);
-					var contentbox_height=363+i*300;
+					// 为什么是3*177呢？这是因为一次要增加三个newsrows
+					var contentbox_height=363+i*3*177;
 					contentbox.style.height=contentbox_height+'px';
 				};
 				seemore.addEventListener('click', seemore_click, false);
@@ -427,6 +460,9 @@
 					var scrollOffsetY = document.documentElement.scrollTop;
 					var visionHeight = document.documentElement.clientHeight;
 					if((docunmentHeight - visionHeight - scrollOffsetY) < 265) {
+						addnewsrows();
+						addnewsrows();
+						addnewsrows();
 						seemore_click();
 					} 
 				}
@@ -450,7 +486,7 @@
 				 		isOverflow("contentbox");
 				 }, false);
 				 
-                
+				 
 			</script>
 		</body>
 	</html>
