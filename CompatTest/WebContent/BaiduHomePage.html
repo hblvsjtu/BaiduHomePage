@@ -96,10 +96,10 @@
 			<div id="logozone" class="logozone">
 					<a href="https://www.baidu.com/" target="_blank"><img src="picture/mylogo.png"/></a>
 			</div>
-			<form id="searchform" name="searchform" class="searchform" href="https://www.baidu.com/s?wd=上海交通大学&rsv_spt=1&rsv_iqid=0x9d24a43d0004052c&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=40&rsv_sug1=27&rsv_sug7=101&rsv_sug2=1&prefixsug=%25E4%25B8%258A%25E6%25B5%25B7%25E4%25BA%25A4%25E9%2580%259A&rsp=0&inputT=11157&rsv_sug4=11157">
+			<form id="searchform" name="searchform" class="searchform">
 					<a><img class="searchicon" src="picture/blank.png"></a>
 					<input type="text" id="searchinput" class="searchinput" />
-					<button id="searchbutton" class="searchbutton">百度一下</button>
+					<button id="searchbutton" class="searchbutton" >百度一下</button>
 			</form>
 			
 			<div id="contentbox" class="contentbox">
@@ -321,10 +321,10 @@
 				  		newsrows.setAttribute("name","newsrows");
 				  		newstable.appendChild(newsrows);
 				  }
-*/
+				*/
 				  /* 通过复制的方式添加节点cloneNode()
-				 * 当contentbox高度增加的时候添加节点
-				 */
+				   * 当contentbox高度增加的时候添加节点
+				   */
 				  var addnewsrows = function() {
 				  		var newstable = document.getElementById("newstable");
 				  		var oldnewsrows = document.getElementById("newsrows_1");
@@ -485,8 +485,16 @@
 				 document.addEventListener("mousemove", function() {
 				 		isOverflow("contentbox");
 				 }, false);
-				 
-				 
+
+				var searchinput =document.getElementById("searchinput");
+				var searchbutton =document.getElementById("searchbutton");
+				var searchform =document.getElementById("searchform");
+				var visit = function(){
+					var url = "https://www.baidu.com/s?wd=" + searchinput.value + "&rsv_spt=1&rsv_iqid=0x9d24a43d0004052c&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=40&rsv_sug1=27&rsv_sug7=101&rsv_sug2=1&prefixsug=%25E4%25B8%258A%25E6%25B5%25B7%25E4%25BA%25A4%25E9%2580%259A&rsp=0&inputT=11157&rsv_sug4=11157";
+					console.log(url);
+					window.open(url);
+				}
+				searchbutton.addEventListener("click", visit, false);
 			</script>
 		</body>
 	</html>
