@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
+	<!-- <html manifest="myapp.appcache"> -->
 	<html>
 		<head>
 			<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 			<title>BaiduHomePage</title>
 			<link rel="shortcut icon" href="myIcon.ico" type="image/x-icon"/>
 			<link rel="stylesheet" type="text/css" href="BaiduHomePage.css"/>
-			<script src="jquery-3.3.1.js" type="text/javascript"></script>	
+			<script type="text/javascript" src="jquery-3.3.1.js"></script>
+			<script type="text/javascript" src="webOffline.js"></script>
 		</head>
 		<body id="mybody">
 			<div id="box" class="box">
@@ -103,25 +106,23 @@
 			</form>
 			
 			<div id="contentbox" class="contentbox">
+				<input type="radio" name="radio" id="radio_1" >
+				<input type="radio" name="radio" id="radio_2" checked>
+				<input type="radio" name="radio" id="radio_3" >
 				<div id="contentboxtopbar" class="contentboxtopbar">
-					<a href="https://www.baidu.com/">
-						<div id="myfocus" class="myfocus">
-							<img id="myfocusicon" class="myfocuslogo" src="picture/blank.png" />
-							<span>我的关注</span>
-						</div>
-					</a>
-					<a href="https://www.baidu.com/">
-						<div id="myrecommand" class="myrecommand">
-							推荐
-						</div>
-					</a>
-					<a href="https://www.baidu.com/">
-						<div id="mynavigation" class="mynavigation">
-							导航
-						</div>
-					</a>
+					<label for="radio_1" id="myfocus" class="myfocus">
+						<img id="myfocusicon" class="myfocuslogo" src="picture/blank.png" />
+						<span>我的关注</span>
+					</label>
+					<label for="radio_2" id="myrecommand" class="myrecommand">
+						<span>推荐</span>
+					</label>
+					<label for="radio_3" id="mynavigation" class="mynavigation">
+						<span>导航</span>
+					</label>
 				</div>
-				<div id="contentfocusbox" class="contentfocusbox">
+				<div id="contentfocusbox" class="contentfocusbox">contentfocusbox</div>
+				<div id="contentcommandbox" class="contentcommandbox">
 					<aside>
 						<a class="title-text" href="http://top.baidu.com/?fr=mhd_card" target="_blank">实时热点</a>
 						<a class="hot-refresh"> <img class="hot-refresh-icon" src="picture/blank.png"></img><span class="hot-refresh-text">换一换</span></a>
@@ -245,6 +246,7 @@
 						</div>
 					</div>
 				</div>
+				<div id="contentnavigationsbox" class="contentnavigationsbox">contentnavigationsbox</div>
 			</div>
 			<div id="seemore" class="morebar">
 				<div class="morebartext">滚动查看更多</div>
@@ -273,228 +275,6 @@
 				视窗坐标y:<span id='shichuang_Y'></span>px；
 				</span>
 			</footer>
-			<script>
-
-				/* myfocus_mouseenter和myfocus_mouseleave
-				 * 鼠标的进出的同时更换myfocus里面图片
-                 */
-				var $myfocus = $("#myfocus");
-				var myfocus = $myfocus[0];
-				var $myfocusicon = $("#myfocusicon");
-				var myfocusicon = $myfocusicon[0];
-				var myfocus_mouseenter=function() {
-					myfocusicon.style.backgroundImage='url(picture/myfocus_b2.png)';
-				}
-				var myfocus_mouseleave=function() {
-					myfocusicon.style.backgroundImage='url(picture/myfocus_a2.png)';
-				}
-				myfocus.addEventListener('mouseenter', myfocus_mouseenter, false);
-				myfocus.addEventListener('mouseleave', myfocus_mouseleave, false);
-
-				/* newsinterest_mouseenter和newsinterest_mouseleave
-                 * 鼠标的进出的同时更改newsinterest的显藏
-                 */
-				var newsrows=document.getElementsByName("newsrows");
-                var newsinterest=document.getElementsByName("newsinterest");
-                var newsinterest_mouseenter=function() {
-                    this.style.visibility='visible';
-                };
-                var newsinterest_mouseleave=function() {
-                    this.style.visibility="hidden";
-                };
-                var length = document.getElementsByName("newsrows").length;
-                for(let i=0; i<length; i++) {
-                    newsrows[i].addEventListener('mouseenter', newsinterest_mouseenter.bind(newsinterest[i]), false);
-                    newsrows[i].addEventListener('mouseleave', newsinterest_mouseleave.bind(newsinterest[i]), false);
-                }
-
-				/* 增加节点creatElement()
-				 * 当contentbox高度增加的时候添加节点
-				 
-				  var addnewsrows = function() {
-				  		var newstable = document.getElementById("newstable");
-				  		var newsrows = document.createElement("div");
-				  		var length = document.getElementsByName("newsrows").length;
-				  		newsrows.id = "newsrows_" + length;
-				  		newsrows.className = "newsrows1";
-				  		//newsrows.name = "newsrows";无法设置name
-				  		newsrows.setAttribute("name","newsrows");
-				  		newstable.appendChild(newsrows);
-				  }
-				*/
-				  /* 通过复制的方式添加节点cloneNode()
-				   * 当contentbox高度增加的时候添加节点
-				   */
-				  var addnewsrows = function() {
-				  		var newstable = document.getElementById("newstable");
-				  		var oldnewsrows = document.getElementById("newsrows_1");
-				  		var newsrows = oldnewsrows.cloneNode(true);
-				  		length = document.getElementsByName("newsrows").length;
-				  		lengths=length+1;
-				  		newsrows.id = "newsrows_" + lengths;
-				  		newstable.appendChild(newsrows);
-				  		var newsinterest=document.getElementsByName("newsinterest")
-				  		newsinterest[length].id="newsinterest_"+ lengths;
-				  		newsrows.addEventListener('mouseenter', newsinterest_mouseenter.bind(newsinterest[length]), false);
-				  		newsrows.addEventListener('mouseleave', newsinterest_mouseleave.bind(newsinterest[length]), false);
-				  }
-				    
-                /* checkScrollOffset
-                 * 获取窗口滚动条的偏移量
-                 */
-                var checkScrollOffset = function(gundong_X, gundong_Y, myWindow) {
-                	
-                	//使用指定接受参数的元素
-                	var gundong_X = document.getElementById(gundong_X);
-                	var gundong_Y = document.getElementById(gundong_Y);
-
-                	//使用指定的窗口，如果不带参数则使用当前窗口
-                	var w = myWindow || window;
-                	var d = w.document;
-
-                	//除IE8及之前的版本，其他所有的浏览器都能用
-                	if(w.pageXOffset != null) {
-                		gundong_X.innerHTML = "正常版本_" + w.pageXOffset;
-                		gundong_Y.innerHTML = "正常版本_" + w.pageYOffset;
-                	}
-                	
-                	//标准模式下的IE浏览器或其他所有的浏览器
-                	
-                	else if(document.compatMode == "CSS1Compat") {
-                		gundong_X.innerHTML = "标准模式_" + d.documentElement.scrollLeft;
-                		gundong_Y.innerHTML = "标准模式_" + d.documentElement.scrollTop;
-                	}
-
-                	//怪异模式下的IE浏览器或其他所有的浏览器
-                	else {
-                		gundong_X.innerHTML = "怪异模式_" + d.body.scrollLeft;
-                		gundong_Y.innerHTML = "怪异模式_" + d.body.scrollTop;
-                	}	
-                }
-
-                /* getViewportSize
-                 * 获取视窗的宽度和高度
-                 */
-                var getViewportSize = function(shichuang_X, shichuang_Y, myWindow) {
-
-                	var shichuang_X = document.getElementById(shichuang_X);
-                	var shichuang_Y = document.getElementById(shichuang_Y);
-
-                	//使用指定的窗口，如果不带参数则使用当前窗口
-                	var w = myWindow || window;
-                	var d = w.document;
-
-                	//除IE8及之前的版本，其他所有的浏览器都能用
-                	if(w.pageXOffset != null) {
-                		shichuang_X.innerHTML = "正常版本_" + w.innerWidth;
-                		shichuang_Y.innerHTML = "正常版本_" + w.innerHeight;
-                	}
-                	
-                	//标准模式下的IE浏览器或其他所有的浏览器
-                	
-                	else if(document.compatMode == "CSS1Compat") {
-                		shichuang_X.innerHTML = "标准模式_" + d.documentElement.clientWidth;
-                		shichuang_Y.innerHTML = "标准模式_" + d.documentElement.clientHeight;
-                	}
-
-                	//怪异模式下的IE浏览器或其他所有的浏览器
-                	else {
-                		shichuang_X.innerHTML = "怪异模式_" + d.body.clientWidth;
-                		shichuang_Y.innerHTML = "怪异模式_" + d.body.clientHeight;
-                	}	
-                }
-
-                /* getElementSize
-                 * 获取元素的宽度和长度
-                 */
-                var getElementSize = function(myElement) {
-                		var myElement = document.getElementById(myElement);
-                		var box = myElement.getBoundingClientRect();
-                		var width = box.width || (box.right-box.left);
-                		var height = box.height || (box.top-box.bottom);
-                		console.log("box的左上角X坐标："+ box.left +"px;");
-                		console.log("box的左上角Y坐标："+ box.top +"px;");
-                		console.log("box的右下角X坐标："+ box.right +"px;");
-                		console.log("box的右下角Y坐标："+ box.bottom +"px;");
-                		console.log("box的宽度："+ width +"px;");
-                		console.log("box的高度："+ height +"px;");
-
-                }
-
-                document.addEventListener("mousemove", function() {
-                		checkScrollOffset("gundong_X", "gundong_Y");
-                }, false);
-
-                document.addEventListener("mousemove", function() {
-                		getViewportSize("shichuang_X", "shichuang_Y");
-                }, false);
-
-                var myElement = document.getElementById("contentbox");
-               	myElement.addEventListener("mousemove", function() {
-                		getElementSize("contentbox");
-                }, false);
-
-
-				/* 调整contentbox的高度
-                 * 两种方法，一种是点击'seemore'元素
-                 * 另外一种是比较 预设阈值 > 文档高度 - 视窗高度 - 滚动偏移量Y；
-                 * 此时增加contentbox的高度
-                 * 并添加newsrows节点；
-                 */
-
-				var seemore=document.getElementById('seemore');
-				var contentbox=document.getElementById('contentbox');
-				var i=0;
-				var seemore_click=function() {
-					i=i+1;
-					console.log("i的值为: "+i);
-					// 为什么是3*177呢？这是因为一次要增加三个newsrows
-					var contentbox_height=363+i*3*177;
-					contentbox.style.height=contentbox_height+'px';
-				};
-				seemore.addEventListener('click', seemore_click, false);
-
-				var setcontentboxHeight = function() {
-					var html = document.getElementsByTagName("html")[0];
-					var docunmentHeight =html.getBoundingClientRect().height;
-					var scrollOffsetY = document.documentElement.scrollTop;
-					var visionHeight = document.documentElement.clientHeight;
-					if((docunmentHeight - visionHeight - scrollOffsetY) < 265) {
-						addnewsrows();
-						addnewsrows();
-						addnewsrows();
-						seemore_click();
-					} 
-				}
-				document.addEventListener("mousemove", setcontentboxHeight, false);
-
-				/* 判断元素是否溢出
-				 * 先利用clientHeight获取元素高度，在利用scrollHeight获取内容高度
-				 * 然后比较这两个高度，如果scrollHeight>clientHeight,则溢出
-				 */ 
-				 var isOverflow = function(ele) {
-					var element = document.getElementById(ele);
-					var scrollHeight = element.scrollHeight;
-					var clientHeight = element.clientHeight;
-					if(scrollHeight > clientHeight) {
-						console.log(ele + "溢出了");
-					}else {
-						console.log(ele + "没有溢出");
-					}
-				 }
-				 document.addEventListener("mousemove", function() {
-				 		isOverflow("contentbox");
-				 }, false);
-
-				var searchinput =document.getElementById("searchinput");
-				var searchbutton =document.getElementById("searchbutton");
-				var searchform =document.getElementById("searchform");
-				var visit = function(){
-					var url = "https://www.baidu.com/s?wd=" + searchinput.value + "&rsv_spt=1&rsv_iqid=0x9d24a43d0004052c&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=40&rsv_sug1=27&rsv_sug7=101&rsv_sug2=1&prefixsug=%25E4%25B8%258A%25E6%25B5%25B7%25E4%25BA%25A4%25E9%2580%259A&rsp=0&inputT=11157&rsv_sug4=11157";
-					console.log(url);
-					window.open(url);
-				}
-				searchbutton.addEventListener("click", visit, false);
-			</script>
 		</body>
+		<script type="text/javascript" src="./script.js"></script>
 	</html>

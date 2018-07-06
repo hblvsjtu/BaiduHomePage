@@ -1,0 +1,25 @@
+CACHE MANIFEST
+# version 2018-05-02 15:16
+
+CACHE:
+BaiduHomePage.html
+BaiduHomePage.css
+jquery-3.3.1.js
+webOffline.js
+myIcon.ico
+picture/blank.png
+picture/ICPlogo2.png
+picture/myfocus_a2.png
+picture/myfocus_b2.png
+picture/mylogo.png
+picture/surcue2.png
+picture/zhuazi2.png
+picture/mylogo.png
+workerTest.js
+
+FALLBACK:
+BaiduHomePage.html
+
+
+NETWORK:
+

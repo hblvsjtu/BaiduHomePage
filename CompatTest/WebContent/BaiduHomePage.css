@@ -386,9 +386,16 @@
 			margin: auto;
 			margin-top: 100px; 
 			width: 896px;
-			height: 404px;
+			height: 581px;
 		   	overflow: hidden;
 			border: 1px solid #e7e7e7;
+		}
+
+		.contentbox input:nth-of-type(1),
+		.contentbox input:nth-of-type(2),
+		.contentbox input:nth-of-type(3) {
+			position: absolute;
+			visibility: hidden;
 		}
 
 		/* contentbox
@@ -402,11 +409,19 @@
 			border-bottom: 1px solid #e7e7e7;
 		}
 
+		.contentboxtopbar a:nth-of-type(1),
+		.contentboxtopbar a:nth-of-type(2),
+		.contentboxtopbar a:nth-of-type(3) {
+			text-decoration: none;
+		}
+		
+
 		/* contentbox
 		 * 为了把.myfocus, .myrecommand, .mynavigation放在同一行 
 		 * 于是使用display: inline-block;
 		 */
 		.myfocus, .myrecommand, .mynavigation{
+			float: left;
 			display: inline-block;
 			zoom: 1;
 			width: 80px;
@@ -423,16 +438,10 @@
 			width: 124px;
 		}
 
-		.myrecommand {
-			color:white;
-			background:#9D9D9D;
-		}
-
 		.myfocuslogo {
 			width: 17px;
 			height: 17px;
 			background: url(picture/myfocus_a2.png) no-repeat 1px 0 ;
-			
 		}
 
 
@@ -440,24 +449,73 @@
 			vertical-align:middle;
 		}
 
+		/* 初始样式 */
+		.contentfocusbox, .contentcommandbox, .contentnavigationsbox {
+			float: left;
+			position: absolute;
+			width: 896px;
+			margin-top: 20px;
+			margin-right: 5px;
+			opacity: 0;
+		}
+
+		/* 鼠标停留的样式 */
 		.myfocus:hover, .myrecommand:hover, .mynavigation:hover {
 			font-weight:bold;
 			color:white;
 			background:	#BEBEBE;
 		}
 
+		.myfocus:hover span, 
+		.myrecommand:hover span, 
+		.mynavigation:hover span {
+			font-weight: bold;
+			color: white;
+		}
+
+		.myfocus:hover .myfocuslogo {
+			background: url(picture/myfocus_b2.png) no-repeat 1px 0 ;
+		}
+
+		/* 鼠标点击的样式 */
+		#radio_1:checked ~ div:nth-of-type(1) label:nth-of-type(1), 
+		#radio_2:checked ~ div:nth-of-type(1) label:nth-of-type(2), 
+		#radio_3:checked ~ div:nth-of-type(1) label:nth-of-type(3) {
+			background:	#BEBEBE;
+		}
+
+		#radio_1:checked ~ div:nth-of-type(1) label:nth-of-type(1) span, 
+		#radio_2:checked ~ div:nth-of-type(1) label:nth-of-type(2) span, 
+		#radio_3:checked ~ div:nth-of-type(1) label:nth-of-type(3) span {
+			font-weight: bold;
+			color: white;
+		}
+
+		#radio_1:checked ~ #contentfocusbox, 
+		#radio_2:checked ~ #contentcommandbox, 
+		#radio_3:checked ~ #contentnavigationsbox {
+			opacity: 1;
+            -webkit-transition: .9s;
+		}
+
+		#radio_1:checked  ~ div:nth-of-type(1) .myfocuslogo {
+			background: url(picture/myfocus_b2.png) no-repeat 1px 0 ;
+		}
+
+		.contentfocusbox {
+			background: yellow;
+		}
+
+		.contentnavigationsbox {
+			background: blue;
+		}
+
 		/* contentbox
 		 * contentfocusbox
-		 * “我的关注”盒子
+		 * “我的推荐”盒子
 		 */
-		.contentfocusbox {
-			display:inline-block;
-			margin-top: 20px;
-			margin-right: 5px;
-			width:100%;
-		}
-						
-		.contentfocusbox aside {
+
+		.contentcommandbox aside {
 			float:right;
 			display:inline-block;
 			width:300px;
@@ -558,7 +616,7 @@
 
 		.contentfocusboxleftside {
 			padding: 0px 25px;
-			height:100px;
+			height: 100px;
 			font-size:0;
 		}
 
